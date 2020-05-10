@@ -1,0 +1,39 @@
+﻿@model MuzikosBangaCsharp.ViewModels.UpdateEmailViewModel
+@{
+    ViewBag.Title = "UpdateDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="userDetails">
+
+    <div class="container borderBottom">
+        <h2>EMAIL</h2>
+        <input type="text" class="email" name="email" placeholder="Email address..." value="@Model.email" required>
+        <span class="message"></span>
+        <button class="button" onclick="updateEmail('email')">SAVE</button>
+    </div>
+
+    <div class="container">
+        <h2>PASSWORD</h2>
+        <input type="password" class="oldPassword" name="oldPassword" placeholder="Current password">
+        <input type="password" class="newPassword1" name="newPassword1" placeholder="New password">
+        <input type="password" class="newPassword2" name="newPassword2" placeholder="Confirm password">
+        <span class="message"></span>
+        <button class="button" onclick="updatePassword('oldPassword', 'newPassword1', 'newPassword2')">SAVE</button>
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+        //function updateEmail(emailClass) {
+        //    console.log("I am here ** ** ");
+        //    var emailValue = $("." + emailClass).val();
+
+        //    $.post("UpdateEmail", { email: emailValue })
+        //        .done(function (response) {
+        //            $("." + emailClass).nextAll(".message").text(response);
+        //        });
+        //}
+
+    </script>
+    }

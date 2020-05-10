@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MuzikosBangaCsharp.Models.Album>
+
+<h1 class="pageHeadingBig">ALBUMAI</h1>
+
+<div class="gridViewContainer">
+
+    @foreach (var album in Model)
+    {
+
+        <div class="gridViewItem">
+            <a onclick='openPage("album/@album.id")' @*href="@Url.Action("album", "Home", new { id = album.id})"*@ >
+                <img src="~/Content/images/artwork/@album.artworkPath" />
+                <div class="gridViewInfo">
+                    @album.title
+                </div>
+            </a>
+        </div>
+    }
+</div>

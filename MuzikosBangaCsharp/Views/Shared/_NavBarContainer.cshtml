@@ -1,0 +1,37 @@
+﻿<div id="navBarContainer">
+    <nav class="navBar">
+
+        <a class="logo" href="@Url.Action("Browse")">
+            <img src="~/Content/images/icons/logo.png" />
+        </a>
+
+        <div class="group">
+            <div class="navItem">
+                <a class="navItemLink" onclick='openPage("Search")' @*href="@Url.Action("Search", "Home")"*@>
+                    Ieškoti
+                    <img src="~/Content/images/icons/search.png" class="icon" alt="Search" />
+                </a>
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="navItem">
+                <a class="navItemLink" onclick='openPage("Browse")'  >Naršyti</a>
+            </div>
+
+            <div class="navItem">
+                <a class="navItemLink" onclick='openPage("YourMusic")' @*href="@Url.Action("YourMusic", "Home")"*@ >Tavo Muzika</a>
+            </div>
+
+            <div class="navItem">
+                <a class="navItemLink" onclick='openPage("Settings")' @*href="@Url.Action("Settings", "Home")"*@ >@Session["username"]</a>
+            </div>
+
+            <div class="navItem">
+                <br/> <br/><br/><hr>
+                <a class="navItemLink" href='@Url.Action("Logout")'>Atsijungti</a>
+            </div>
+        </div>
+
+    </nav>
+</div>

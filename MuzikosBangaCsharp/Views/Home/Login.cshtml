@@ -1,0 +1,27 @@
+﻿@model MuzikosBangaCsharp.ViewModels.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutRegistration.cshtml";
+}
+    <div id="loginForm">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            <h2>PRISIJUNGTI</h2>
+                @Html.ValidationSummary(true, "")
+            <p>
+                @Html.LabelFor(u => u.Username)
+                @Html.TextBoxFor(u => u.Username)
+                @Html.ValidationMessageFor(u => u.Username)
+            </p>
+            <p>
+                @Html.LabelFor(p => p.Password)
+                @Html.PasswordFor(p => p.Password)
+                @Html.ValidationMessageFor(p=>p.Password)
+            </p>
+            <button type="submit" name="loginButton">Prisijungti</button>
+            <div class="hasAccountText">
+                <a href="@Url.Action("Register")">Neturi prisijungimo? Registracija čia.</a>
+            </div> <!-- hasAccountText -->
+        }
+    </div>
+

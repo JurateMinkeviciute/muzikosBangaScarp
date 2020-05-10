@@ -1,0 +1,74 @@
+﻿@model MuzikosBangaCsharp.ViewModels.AlbumViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "album";
+    int  songNumber=1;
+}
+
+@*@Html.Partial("_Album")*@
+
+<div class="entityInfo">
+    <div class="leftSection">
+        <img src="~/Content/images/artwork/@Model.artworkPath" />
+    </div>
+
+    <div class="rightSection">
+        <h2>@Model.title</h2>
+        <p>Atlikėjas @Model.ArtistName</p>
+        <p>@Model.NumberOfSongs dainos</p>
+
+    </div>
+</div>
+
+<div class="tracklistContainer">
+    <ul class="tracklist">
+
+        @foreach (var song in Model.songs)
+        {
+            <li class='tracklistRow'>
+                <div class='trackCount'>
+                    <img class='play' src='~/Content/images/icons/play-white.png' onclick='setTrack(@song.id, tempPlaylist, true)'>
+                    <span class='trackNumber'>@songNumber</span>
+                </div>
+
+
+                <div class='trackInfo'>
+                    <span class='trackName'>@song.title</span>
+                    <span class='artistName'>@Model.ArtistName</span>
+                </div>
+
+                <div class='trackOptions'>
+                    <input type='hidden' class='songId' value='@song.id'>
+                    <img class='optionsButton' src='~/Content/images/icons/more.png' onclick='showOptionsMenu(this)'>
+                </div>
+
+                <div class='trackDuration'>
+                    <span class='duration'>@song.duration</span>
+                </div>
+
+
+            </li>
+            songNumber++;
+        }
+
+
+        <script>
+			tempPlaylist = JSON.parse('@Html.Raw(Json.Encode(@Model.songsIds))');
+        </script>
+
+    </ul>
+</div>
+
+<nav class="optionsMenu">
+    <input type="hidden" class="songId">
+    <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
+
+
+
+
+
+
+
+
+

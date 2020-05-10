@@ -1,0 +1,81 @@
+﻿@model MuzikosBangaCsharp.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "";
+}
+
+
+<div class="searchContainer">
+
+    <h4>Dainos, atlikėjo ar albumo paieškos laukas</h4>
+    <input type="text" class="searchInput" value="@Model.search" placeholder="Ieškoti ..." />
+
+</div>
+
+<div id="searchResult">
+    @if (Model.search != "")
+    {
+        @Html.Partial("_SearchResult")
+    }
+</div>
+
+<nav class="optionsMenu">
+    <input type="hidden" class="songId">
+    <select class="item playlist">
+        <option value="">Įdėti į Grojaraštį</option>
+
+        @foreach (var dropItem in Model.dropdownList)
+        {
+            <option value=@dropItem.id>@dropItem.name</option>
+        }
+
+    </select>
+</nav>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".searchInput").focus();
+
+        $(".searchInput").keyup(function () {
+            var searchTerm = $('.searchInput').val();
+
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                $.ajax({
+                    //url: 'Url.Action("searchAjax")',
+                    url: 'searchAjax',
+                    type: 'GET',
+                    data: { search: searchTerm }
+                }).done(function (result) {
+                    $('#searchResult').html(result);
+                });
+            }, 2000);
+        })
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

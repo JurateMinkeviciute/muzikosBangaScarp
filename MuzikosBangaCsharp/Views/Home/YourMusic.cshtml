@@ -1,0 +1,85 @@
+﻿@model  IEnumerable<MuzikosBangaCsharp.Models.Playlist>
+@{
+    ViewBag.Title = "YourMusic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div id="mainViewContainer">
+    <div id="mainContent">
+        <div id="AjaxToChangeContent">
+            @*<div id="AjaxToChangeContent">
+
+        </div>
+    </div> <!-- mainContent -->
+</div> <!-- mainViewContainer -->*@
+<div id="mainContent">
+    <div class="playlistsContainer">
+
+        <div class="gridViewContainer">
+            <h2>GROJARAŠČIAI</h2>
+
+            <div class="buttonItems">
+                <button class="button green" onclick="createPlaylist()">NAUJAS GROJARAŠTIS</button>
+            </div>
+            @if (Model.Any())
+            {
+                foreach (var play in Model)
+                {
+                    <div class='gridViewItem'>
+                        <a href="@Url.Action("Playlist", new { id= play.id })">
+                            <div class='playlistImage'>
+                                <img src="~/Content/images/icons/playlist.png" />
+                            </div>
+
+                            <div class='gridViewInfo'>
+                                @play.name
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <span class='noResults'>Neturite grojaraščių </span>
+            }
+        </div>
+    </div>
+</div>
+    @section Scripts
+    {
+        <script>
+        function createPlaylist()
+        {
+            var popup = prompt("Please enter the name of your playlist");
+
+            if (popup != null) {
+
+                $.post("includes/handlers/ajax/createPlaylist.php", { name: popup, username: userLoggedIn })
+                    .done(function (error) {
+
+                        if (error != "") {
+                            alert(error);
+                            return;
+                        }
+
+                        //do something when ajax returns
+                        openPage("yourMusic.php");
+                    });
+
+
+                    $.ajax({
+                        url: '@Url.Action("searchAjax")',
+                        type: 'POST',
+                        data: { name: popup }
+                    }).done(function (result) {
+                        $('#searchResult').html(result);
+                    });
+
+
+
+            }
+
+        }
+
+        </script>
+    }

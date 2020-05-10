@@ -1,0 +1,80 @@
+﻿@model MuzikosBangaCsharp.ViewModels.ArtistViewModel
+@{
+    ViewBag.Title = "Artist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int rowNumber = 1;
+}
+
+<div class="entityInfo borderBottom">
+    <div class="centerSection">
+        <div class="artistInfo">
+            <h1 class="artistName">@Model.nameOfArtist</h1>
+            <div class="headerButtons">
+                <button class="button green" onclick="playFirstSong()">GROTI</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tracklistContainer borderBottom">
+    <h2>DAINOS</h2>
+    <ul class="tracklist">
+
+        @foreach (var song in Model.songs)
+        {
+            <li class='tracklistRow'>
+                <div class='trackCount'>
+                    <img class='play' src='~/Content/images/icons/play-white.png' onclick='setTrack(@song.id, tempPlaylist, true)'>
+                    <span class='trackNumber'>@rowNumber</span>
+                </div>
+
+
+                <div class='trackInfo'>
+                    <span class='trackName'>@song.title</span>
+                    <span class='artistName'>@Model.nameOfArtist</span>
+                </div>
+
+                <div class='trackOptions'>
+                    <input type='hidden' class='songId' value='@song.album'>
+                    <img class='optionsButton' src='~/Content/images/icons/more.png' onclick='showOptionsMenu(this)'>
+                </div>
+
+                <div class='trackDuration'>
+                    <span class='duration'>@song.duration</span>
+                </div>
+            </li>
+            rowNumber++;
+        }
+
+        <script>
+			tempPlaylist = JSON.parse('@Html.Raw(Json.Encode(@Model.songsIds))');
+        </script>
+
+    </ul>
+</div>
+
+<div class="gridViewContainer">
+    <h2>ALBUMAI</h2>
+
+    @foreach (var album in Model.albums)
+    {
+        <div class='gridViewItem'>
+            <span onclick='openPage("Album/@album.id")'>
+                <img src='~/Content/images/artwork/@album.artworkPath'>
+                <div class='gridViewInfo'>
+                    @album.title
+                </div>
+            </span>
+        </div>
+    }
+</div>
+
+
+<nav class="optionsMenu">
+    <input type="hidden" class="songId">
+    <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
+
+
+

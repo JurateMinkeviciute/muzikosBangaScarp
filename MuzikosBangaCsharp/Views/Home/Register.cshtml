@@ -1,0 +1,58 @@
+﻿@model MuzikosBangaCsharp.ViewModels.RegisterViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutRegistration.cshtml";
+}
+<div id="registerForm">
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+    {
+        <h2>REGISTRACIJA</h2>
+        <div class="field-validation">
+            @Html.Raw(ViewBag.Message)
+        </div>
+        @Html.ValidationSummary(true, "")
+        <p>
+            @Html.LabelFor(u => u.Username)
+            @Html.TextBoxFor(u => u.Username)
+            @Html.ValidationMessageFor(e => e.Username)
+        </p>
+        <p>
+            @Html.LabelFor(f => f.FirstName)
+            @Html.TextBoxFor(f => f.FirstName)
+            @Html.ValidationMessageFor(e => e.FirstName)
+        </p>
+        <p>
+            @Html.LabelFor(l => l.LastName)
+            @Html.TextBoxFor(l => l.LastName)
+            @Html.ValidationMessageFor(e => e.LastName)
+        </p>
+        <p>
+            @Html.LabelFor(e => e.Email)
+            @Html.TextBoxFor(e => e.Email)
+            @Html.ValidationMessageFor(e => e.Email)
+        </p>
+        <p>
+            @Html.LabelFor(e => e.EmailConfirm)
+            @Html.TextBoxFor(e => e.EmailConfirm)
+            @Html.ValidationMessageFor(e => e.EmailConfirm)
+        </p>
+        <p>
+            @Html.LabelFor(p => p.Password)
+            @Html.PasswordFor(p => p.Password)
+            @Html.ValidationMessageFor(p => p.Password)
+        </p>
+        <p>
+            @Html.LabelFor(p => p.PasswordConfirm)
+            @Html.PasswordFor(p => p.PasswordConfirm)
+            @Html.ValidationMessageFor(p => p.PasswordConfirm)
+        </p>
+        <button type="submit" id="registerButton" name="registerButton">Prisijungti</button>
+        <div class="hasAccountText">
+            <a href="@Url.Action("Login")">Neturi prisijungimo? Prisijungimas čia.</a>
+            @*<span id="hideRegister">Turite prisijungimus? Prisijungti čia. </span>*@
+        </div> <!-- hasAccountText -->
+        @*</form>*@ <!-- form -->
+    }
+</div> <!-- inputContainer -->
+

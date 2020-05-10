@@ -1,0 +1,14 @@
+﻿
+    <div class="entityInfo">
+
+        <div class="centerSection">
+            <div class="userInfo">
+                <h1> @Session["Username"] @*getFirstAndLastName()*@ </h1>
+            </div>
+        </div>
+        <div class="buttonItems">
+            <a class="button" onclick='openPage("UpdateDetails")' @*href="@Url.Action("UpdateDetails")"*@ >KEISTI DUOMENIS</a>
+            <a class="button" href="@Url.Action("Logout")">ATSIJUNGTI</a>
+        </div>
+
+    </div>

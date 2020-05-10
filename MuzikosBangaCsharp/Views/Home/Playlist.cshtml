@@ -1,0 +1,82 @@
+﻿@model MuzikosBangaCsharp.ViewModels.PlaylistSongsViewModel
+@{
+    ViewBag.Title = "Playlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+<div id="mainContent">
+    <div class="playlistsContainer">
+
+        <div class="entityInfo">
+
+            <div class="leftSection">
+                <div class="playlistImage">
+                    <img src="~/Content/images/icons/playlist.png" />
+                </div>
+            </div>
+
+            <div class="rightSection">
+                <h2>@Model.name</h2>
+                <p>Sukūrė @Model.owner</p>
+                <p>@Model.numberOfSongs dainos</p>
+                <button class="button" onclick="deletePlaylist('<?php echo $playlistId; ?>')">IŠTRINTI GROJARAŠTĮ</button>
+            </div>
+
+        </div>
+
+
+        <div class="tracklistContainer">
+            <ul class="tracklist">
+
+                @foreach (var song in Model.songs)
+                {
+                    <li class='tracklistRow'>
+                        <div class='trackCount'>
+                            <img class='play' src='~/Content/images/icons/play-white.png' onclick='setTrack(@song.id, tempPlaylist, true)'>
+                            <span class='trackNumber'>@i</span>
+                        </div>
+
+
+                        <div class='trackInfo'>
+                            <span class='trackName'>@song.title</span>
+                            <span class='artistName'>@song.nameOfArtist</span>
+                        </div>
+
+                        <div class='trackOptions'>
+                            <input type='hidden' class='songId' value='@Model.id'>
+                            <img class='optionsButton' src='~/Content/images/icons/more.png' onclick='showOptionsMenu(this)'>
+                        </div>
+
+                        <div class='trackDuration'>
+                            <span class='duration'>@song.duration</span>
+                        </div>
+
+
+                    </li>
+                    i++;
+                }
+
+                <script>
+			    tempPlaylist = JSON.parse('@Html.Raw(Json.Encode(@Model.songsIds))');
+                </script>
+
+            </ul>
+        </div>
+
+        <nav class="optionsMenu">
+            <input type="hidden" class="songId">
+            <select class="item playlist">
+                <option value="">Įdėti į Grojaraštį</option>
+
+                @foreach (var dropItem in Model.dropdownList)
+                {
+                    <option value=@dropItem.id>@dropItem.name</option>
+                }
+
+            </select>
+
+            <div class="item" onclick="removeFromPlaylist(this, @Model.id)">Ištrinti</div>
+        </nav>
+
+    </div>
+</div>

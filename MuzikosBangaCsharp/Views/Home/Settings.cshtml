@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="entityInfo">
+
+    <div class="centerSection">
+        <div class="userInfo">
+            <h1> @Session["Username"] @*getFirstAndLastName()*@ </h1>
+        </div>
+    </div>
+    <div class="buttonItems">
+        <a class="button" href="@Url.Action("UpdateDetails")" >KEISTI DUOMENIS</a>
+        <a class="button" href="@Url.Action("Logout")">ATSIJUNGTI</a>
+    </div>
+
+</div>
+
